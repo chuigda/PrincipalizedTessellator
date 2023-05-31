@@ -322,7 +322,7 @@ function principalized_tessellate(
         hard_break_interps
     )
 
-    if !isnothing(plot)
+    if !isnothing(plotName)
         args = []
         for i in eachindex(interps)
             interp = interps[i]
