@@ -53,7 +53,12 @@ function call_interp(interp::Interpolator, x::Float64)::Union{Float64,Nothing}
     elseif x == interp.end_x
         return interp.end_w
     else
-        return ppval(interp.pp, x)[1]
+        rst = ppval(interp.pp, x)[1]
+        if rst < 0.0
+            return 0.0
+        end
+
+        return rst
     end
 end
 
