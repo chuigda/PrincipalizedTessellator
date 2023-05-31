@@ -1,32 +1,35 @@
+import JSON
+
 include("./vessel.jl")
 
+function layer_from_json_object(json::Dict{String,Any})::Layer
+    return Layer(
+        map(json["controlPoints"]) do cp
+            ControlPoint(
+                parse(Float64, cp["x"]),
+                parse(Float64, cp["w"])
+            )
+        end,
+        parse(Float64, json["h"])
+    )
+end
+
 function test()
-    v::Vessel = Vessel([
-        Layer([
-            ControlPoint(0, 0),
-            ControlPoint(1, 1),
-            ControlPoint(2, 2),
-            ControlPoint(4, 3),
-            ControlPoint(8, 4),
-            ControlPoint(16, 5),
-            ControlPoint(32, 6)
-        ], 4),
-        Layer([
-            ControlPoint(1 + 4, 0),
-            ControlPoint(2 + 4, 1),
-            ControlPoint(4 + 4, 2),
-            ControlPoint(8 + 4, 3),
-            ControlPoint(16 + 4, 4),
-            ControlPoint(31, 5)
-        ], 0)
-    ])
+    open("North Darkota.json") do f
+        cfg::GenerationConfig = GenerationConfig(3.0, 1.0)
 
-    cfg::GenerationConfig = GenerationConfig(3.0, 0.5)
+        s = read(f, String)
+        json = JSON.parse(s)
 
-    principalized_tessellate(spline, v, cfg, plotName="spline", color="blue")
-    principalized_tessellate(pchip, v, cfg, plotName="pchip", color="red")
+        v::Vessel = Vessel([
+            layer_from_json_object(json["bottom"])
+            map(layer_from_json_object, json["layers"])
+            layer_from_json_object(json["deck"])
+        ])
 
-    return nothing
+        principalized_tessellate(spline, v, cfg, plotName="spline", color="blue")
+        principalized_tessellate(pchip, v, cfg, plotName="pchip", color="red")
+    end
 end
 
 test()
