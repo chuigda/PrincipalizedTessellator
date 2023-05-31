@@ -1,0 +1,6 @@
+= PrincipalizedTessellator
+author: Chuigda<icey@icey.tech>
+
+Principalized vessel shape tessellator for referential purpose
+
+image::https://github.com/chuigda/PrincipalizedTessellator/assets/29348140/6a4fa7e8-b0de-4d8f-beb2-26f8cc61dcd8[Spline and PCHIP]
