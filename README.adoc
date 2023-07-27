@@ -9,7 +9,5 @@ image::https://github.com/chuigda/PrincipalizedTessellator/assets/29348140/75cbd
 
 == Running the program
 
-1. Get a link:https://tongyuan.cc/release/syslab[MWORKS.Syslab]
+1. Get a link:https://tongyuan.cc/release/syslab[MWORKS.Syslab 2023b]
 2. Enjoy
-
-_In fact, by this time, the program is not directly runnable on the published Syslab 2023a. But if NA developer wants the JavaScript code, contact me in private._
